@@ -316,52 +316,73 @@ else:
 
                    # Lista de produtos (imagens)
 pecas = [
-    "boina.png",
-    "calça_farda.png",
-    "camisa.png",
-    "camisa_farda.png",
-    "conjunto_abrigo.png",
-    "jaqueta_farda.png",
-    "moleton_abrigo.png"
-]
+        "boina.png",
+        "calça_farda.png",
+        "camisa.png",
+        "camisa_farda.png",
+        "conjunto_abrigo.png",
+        "jaqueta_farda.png",
+        "moleton_abrigo.png"
+    ]
 
-# Dicionário dos tamanhos por produto e sexo
+    # Dicionário dos tamanhos por produto e sexo
 tamanhos = {
-    "jaqueta_farda.png": {
-        "masculino": ["EXG", "G1", "G2", "G3", "G4"],
-        "feminino": ["EXG", "G1", "G2", "G3", "G4"]
-    },
-    ...
-}
+        "jaqueta_farda.png": {
+            "masculino": ["EXG", "G1", "G2", "G3", "G4"],
+            "feminino": ["EXG", "G1", "G2", "G3", "G4"]
+        },
+        "conjunto_abrigo.png": {
+            "masculino": ["EXG", "G1", "G2", "G3", "G4"],
+            "feminino": ["EXG", "G1", "G2", "G3", "G4"]
+        },
+        "calça_farda.png": {
+            "masculino": ["46", "48", "50", "52", "54", "56", "58", "60"],
+            "feminino": ["46", "48", "50", "52", "54", "56", "58"]
+        },
+        "camisa.png": {
+            "masculino": ["6", "7", "8", "9", "10", "11", "12"],
+            "feminino": ["6", "7", "10", "11", "12", "34", "G1", "GG"]
+        },
+        "camisa_farda.png": {
+            "masculino": ["6", "7", "8", "9", "10", "11", "12"],
+            "feminino": ["6", "7", "10", "11", "12", "34", "G1", "GG"]
+        },
+        "moleton_abrigo.png": {
+            "masculino": ["P", "M", "G", "GG"],
+            "feminino": ["P", "M", "G", "GG"]
+        },
+        "boina.png": {
+            "masculino": [],
+            "feminino": []
+        }
+    }
 
 entrega = {}
-
 for peca in pecas:
-    img_path = os.path.join("images", peca)
-    nome_peca = peca.replace(".png", "")
-    if os.path.exists(img_path):
+        img_path = os.path.join("images", peca)
+nome_peca = peca.replace(".png", "")
+if os.path.exists(img_path):
         st.image(img_path, width=100)
-    else:
+else:
         st.text(f"{nome_peca} (imagem não encontrada)")
 
-    qtd = st.number_input(f"Quantidade de {nome_peca}", min_value=0, step=1, key=f"qtd_{peca}")
-    sex_key = "masculino" if sexo in ["m", "masculino"] else "feminino"
-    lista_tamanhos = tamanhos.get(peca, {}).get(sex_key, [])
+qtd = st.number_input(f"Quantidade de {nome_peca}", min_value=0, step=1, key=f"qtd_{peca}")
+sex_key = "masculino" if sexo in ["m", "masculino"] else "feminino"
+lista_tamanhos = tamanhos.get(peca, {}).get(sex_key, [])
 
-    if lista_tamanhos:
+if lista_tamanhos:
         tamanho_sel = st.selectbox(f"Tamanho de {nome_peca}", options=[""] + lista_tamanhos, key=f"tam_{peca}")
         if tamanho_sel == "":
             tamanho_manual = st.text_input(f"Informe o tamanho manual para {nome_peca}", key=f"tam_manual_{peca}")
             tamanho_final = tamanho_manual.strip()
         else:
             tamanho_final = tamanho_sel
-    else:
+else:
         tamanho_final = ""
 
-    entrega[peca] = {"quantidade": qtd, "tamanho": tamanho_final}
+entrega[peca] = {"quantidade": qtd, "tamanho": tamanho_final}
 
-
-        if st.button("Salvar Entrega"):
+if st.button("Salvar Entrega"):
             registros_salvos = 0
             for peca, dados in entrega.items():
                 qtd = dados["quantidade"]
@@ -383,7 +404,7 @@ for peca in pecas:
                 st.warning("Nenhuma peça foi informada com quantidade maior que zero.")
 
     # --- CONSULTAR ALUNO ---
-    elif menu == "Consultar Aluno":
+elif menu == "Consultar Aluno":
         st.subheader("Consulta de Entregas de Fardas por Aluno")
         alunos = list(alunos_col.find())
         nomes_alunos = [a["nome"] for a in alunos] if alunos else []
@@ -400,7 +421,7 @@ for peca in pecas:
                 st.info("Nenhum registro encontrado para este aluno.")
 
     # --- ABA IMPORTAR ALUNOS ---
-    elif menu == "Importar Alunos":
+elif menu == "Importar Alunos":
         st.subheader("📚 Importar Alunos via TXT ou CSV")
 
         if st.button("🧹 Limpar Tabela de Alunos"):
@@ -447,7 +468,7 @@ for peca in pecas:
             st.error(f"❌ Erro ao importar arquivo: {e}")
 
 # --- ABA CADASTRO DE USUÁRIOS ---
-    elif menu == "Cadastro de Usuários":
+elif menu == "Cadastro de Usuários":
         st.subheader("Cadastro e Gerenciamento de Usuários")
 
         usuarios = list(usuarios_col.find({}, {"_id": 0, "usuario": 1, "nivel": 1}))
@@ -493,7 +514,7 @@ for peca in pecas:
                     st.success(f"Usuário {novo_usuario} cadastrado com sucesso!")
                     st.rerun()
 
-    elif menu == "🚪 Sair do Sistema":
+elif menu == "🚪 Sair do Sistema":
         st.session_state.logado = False
         st.success("Sessão encerrada.")
         st.rerun()
