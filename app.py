@@ -15,7 +15,7 @@ from reportlab.lib import colors
 import pandas as pd
 
 # --- CONFIGURAÇÃO DE MONGO ---
-client = MongoClient("mongodb+srv://bibliotecaluizcarlos:<db_password>@cluster0.9mombev.mongodb.net/")
+client = MongoClient("mongodb+srv://bibliotecaluizcarlos:dqFXFlBUGfNw8ky@cluster0.vlfmpuv.mongodb.net")
 db = client["fardasDB"]
 
 usuarios_col = db["usuarios"]
