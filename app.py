@@ -293,103 +293,100 @@ else:
                 st.error(f"Erro ao importar arquivo: {e}")
 
     elif menu == "Alunos":
-        st.subheader("Registro de Entrega de Fardas aos Alunos")
-            
-        alunos = list(alunos_col.find())
-        nomes_alunos = [a["nome"] for a in alunos] if alunos else []
-            
-        aluno_nome = st.selectbox("Aluno", nomes_alunos)
-         
-# Buscar os dados do aluno selecionado
-        aluno_selecionado = next((a for a in alunos if a["nome"] == aluno_nome), None)
-            
-        if aluno_selecionado:
-                    turma = aluno_selecionado.get("turma", "Sem turma")
-                    cgm = aluno_selecionado.get("cgm", "Sem CGM")
-                    sexo = aluno_selecionado.get("sexo", "Não informado")
-            
-                    # Exibir informações
-                    st.write(f"**Turma:** {turma}")
-                    st.write(f"**CGM:** {cgm}")
-                    st.write(f"**Sexo:** {sexo}")
+    st.subheader("Registro de Entrega de Fardas aos Alunos")
 
-# Exemplo: simulação de aluno selecionado
-aluno_selecionado = st.checkbox("Aluno selecionado")
+    alunos = list(alunos_col.find())
+    nomes_alunos = [a["nome"] for a in alunos] if alunos else []
 
-if aluno_selecionado:
+    aluno_nome = st.selectbox("Aluno", nomes_alunos)
 
-    # Campo para selecionar sexo
-    sexo = st.selectbox("Sexo do aluno", ["masculino", "feminino"])
+    # Buscar os dados do aluno selecionado
+    aluno_selecionado = next((a for a in alunos if a["nome"] == aluno_nome), None)
 
-# Lista de produtos (imagens)
-pecas = [
-        "boina.png",
-        "calça_farda.png",
-        "camisa.png",
-        "camisa_farda.png",
-        "conjunto_abrigo.png",
-        "jaqueta_farda.png",
-        "moleton_abrigo.png"
-    ]
+    if aluno_selecionado:
+        turma = aluno_selecionado.get("turma", "Sem turma")
+        cgm = aluno_selecionado.get("cgm", "Sem CGM")
+        sexo = aluno_selecionado.get("sexo", "não informado").lower()
 
-    # Dicionário dos tamanhos por produto e sexo
-tamanhos = {
-        "jaqueta_farda.png": {
-            "masculino": ["EXG", "G1", "G2", "G3", "G4"],
-            "feminino": ["EXG", "G1", "G2", "G3", "G4"]
-        },
-        "conjunto_abrigo.png": {
-            "masculino": ["EXG", "G1", "G2", "G3", "G4"],
-            "feminino": ["EXG", "G1", "G2", "G3", "G4"]
-        },
-        "calça_farda.png": {
-            "masculino": ["46", "48", "50", "52", "54", "56", "58", "60"],
-            "feminino": ["46", "48", "50", "52", "54", "56", "58"]
-        },
-        "camisa.png": {
-            "masculino": ["6", "7", "8", "9", "10", "11", "12"],
-            "feminino": ["6", "7", "10", "11", "12", "34", "G1", "GG"]
-        },
-        "camisa_farda.png": {
-            "masculino": ["6", "7", "8", "9", "10", "11", "12"],
-            "feminino": ["6", "7", "10", "11", "12", "34", "G1", "GG"]
-        },
-        "moleton_abrigo.png": {
-            "masculino": ["P", "M", "G", "GG"],
-            "feminino": ["P", "M", "G", "GG"]
-        },
-        "boina.png": {
-            "masculino": [],
-            "feminino": []
+        # Exibir informações
+        st.write(f"**Turma:** {turma}")
+        st.write(f"**CGM:** {cgm}")
+        st.write(f"**Sexo:** {sexo}")
+
+        # Lista de produtos (imagens)
+        pecas = [
+            "boina.png",
+            "calça_farda.png",
+            "camisa.png",
+            "camisa_farda.png",
+            "conjunto_abrigo.png",
+            "jaqueta_farda.png",
+            "moleton_abrigo.png"
+        ]
+
+        # Dicionário dos tamanhos por produto e sexo
+        tamanhos = {
+            "jaqueta_farda.png": {
+                "masculino": ["EXG", "G1", "G2", "G3", "G4"],
+                "feminino": ["EXG", "G1", "G2", "G3", "G4"]
+            },
+            "conjunto_abrigo.png": {
+                "masculino": ["EXG", "G1", "G2", "G3", "G4"],
+                "feminino": ["EXG", "G1", "G2", "G3", "G4"]
+            },
+            "calça_farda.png": {
+                "masculino": ["46", "48", "50", "52", "54", "56", "58", "60"],
+                "feminino": ["46", "48", "50", "52", "54", "56", "58"]
+            },
+            "camisa.png": {
+                "masculino": ["6", "7", "8", "9", "10", "11", "12"],
+                "feminino": ["6", "7", "10", "11", "12", "34", "G1", "GG"]
+            },
+            "camisa_farda.png": {
+                "masculino": ["6", "7", "8", "9", "10", "11", "12"],
+                "feminino": ["6", "7", "10", "11", "12", "34", "G1", "GG"]
+            },
+            "moleton_abrigo.png": {
+                "masculino": ["P", "M", "G", "GG"],
+                "feminino": ["P", "M", "G", "GG"]
+            },
+            "boina.png": {
+                "masculino": [],
+                "feminino": []
+            }
         }
-    }
 
-entrega = {}
-for peca in pecas:
-        img_path = os.path.join("images", peca)
-nome_peca = peca.replace(".png", "")
-if os.path.exists(img_path):
-        st.image(img_path, width=100)
-else:
-        st.text(f"{nome_peca} (imagem não encontrada)")
+        entrega = {}
 
-qtd = st.number_input(f"Quantidade de {nome_peca}", min_value=0, step=1, key=f"qtd_{peca}")
-sex_key = "masculino" if sexo in ["m", "masculino"] else "feminino"
-lista_tamanhos = tamanhos.get(peca, {}).get(sex_key, [])
+        for peca in pecas:
+            img_path = os.path.join("images", peca)
+            nome_peca = peca.replace(".png", "")
 
-if lista_tamanhos:
-        tamanho_sel = st.selectbox(f"Tamanho de {nome_peca}", options=[""] + lista_tamanhos, key=f"tam_{peca}")
-        if tamanho_sel == "":
-            tamanho_manual = st.text_input(f"Informe o tamanho manual para {nome_peca}", key=f"tam_manual_{peca}")
-            tamanho_final = tamanho_manual.strip()
-        else:
-            tamanho_final = tamanho_sel
-else:
-        tamanho_final = ""
+            if os.path.exists(img_path):
+                st.image(img_path, width=100)
+            else:
+                st.text(f"{nome_peca} (imagem não encontrada)")
 
-entrega[peca] = {"quantidade": qtd, "tamanho": tamanho_final}
+            # Quantidade
+            qtd = st.number_input(f"Quantidade de {nome_peca}", min_value=0, step=1, key=f"qtd_{peca}")
 
-if st.button("Salvar Entrega"):
+            # Tamanhos possíveis
+            sex_key = "masculino" if sexo in ["m", "masculino"] else "feminino"
+            lista_tamanhos = tamanhos.get(peca, {}).get(sex_key, [])
+
+            if lista_tamanhos:
+                tamanho_sel = st.selectbox(f"Tamanho de {nome_peca}", options=[""] + lista_tamanhos, key=f"tam_{peca}")
+                if tamanho_sel == "":
+                    tamanho_manual = st.text_input(f"Informe o tamanho manual para {nome_peca}", key=f"tam_manual_{peca}")
+                    tamanho_final = tamanho_manual.strip()
+                else:
+                    tamanho_final = tamanho_sel
+            else:
+                tamanho_final = ""  # Produto sem tamanhos
+
+            entrega[peca] = {"quantidade": qtd, "tamanho": tamanho_final}
+
+        if st.button("Salvar Entrega"):
             registros_salvos = 0
             for peca, dados in entrega.items():
                 qtd = dados["quantidade"]
