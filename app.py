@@ -14,11 +14,21 @@ from reportlab.platypus import Table, TableStyle, SimpleDocTemplate
 from reportlab.lib import colors
 import pandas as pd
 
-# --- CONFIGURAÇÃO DE MONGO ---
+from pymongo import MongoClient
+
 client = MongoClient(
     "mongodb+srv://bibliotecaluizcarlos:dqFXFlBUGfNw8ky@cluster0.vlfmpuv.mongodb.net/ccmgafarda?retryWrites=true&w=majority&authSource=admin"
 )
 db = client["ccmgafarda"]
+usuarios_col = db["usuarios"]
+from pymongo import MongoClient
+
+client = MongoClient(
+    "mongodb+srv://bibliotecaluizcarlos:dqFXFlBUGfNw8ky@cluster0.vlfmpuv.mongodb.net/ccmgafarda?retryWrites=true&w=majority&authSource=admin"
+)
+db = client["ccmgafarda"]
+usuarios_col = db["usuarios"]
+
 
 usuarios_col = db["usuarios"]
 cadastro_col = db["cadastro"]
