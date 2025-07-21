@@ -313,8 +313,15 @@ else:
                     st.write(f"**CGM:** {cgm}")
                     st.write(f"**Sexo:** {sexo}")
 
+# Exemplo: simulação de aluno selecionado
+aluno_selecionado = st.checkbox("Aluno selecionado")
 
-                   # Lista de produtos (imagens)
+if aluno_selecionado:
+
+    # Campo para selecionar sexo
+    sexo = st.selectbox("Sexo do aluno", ["masculino", "feminino"])
+
+# Lista de produtos (imagens)
 pecas = [
         "boina.png",
         "calça_farda.png",
