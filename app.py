@@ -16,12 +16,9 @@ import pandas as pd
 
 from pymongo import MongoClient
 
-client = MongoClient(
-    "mongodb+srv://bibliotecaluizcarlos:dqgFXFlBUGfNw8ky@cluster0.vlfmpuv.mongodb.net?retryWrites=true&w=majority"
-)
-db = client["ccmgafarda"]
-
-usuarios_col = db["usuarios"]
+client = MongoClient("mongodb+srv://bibliotecaluizcarlos:dqgFXFlBUGfNw8ky@cluster0.vlfmpuv.mongodb.net/")
+db = client["fardas"]  # Substitua pelo nome correto do seu banco
+usuarios_col = db["fardasDB"]
 cadastro_col = db["cadastro"]
 produtos_col = db["produtos"]
 movimentacao_col = db["movimentacao"]
