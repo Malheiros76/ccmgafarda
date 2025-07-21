@@ -2,7 +2,7 @@ from pymongo import MongoClient
 import bcrypt
 
 # Conexão MongoDB (mesma que no seu app)
-client = MongoClient("mongodb+srv://bibliotecaluizcarlos:terra166@cluster0.uyvqnek.mongodb.net/?retryWrites=true&w=majority")
+client = MongoClient("mongodb+srv://bibliotecaluizcarlos:<db_password>@cluster0.9mombev.mongodb.net/")
 db = client["fardasDB"]
 usuarios_col = db["usuarios"]
 
