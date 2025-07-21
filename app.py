@@ -15,8 +15,10 @@ from reportlab.lib import colors
 import pandas as pd
 
 # --- CONFIGURAÇÃO DE MONGO ---
-client = MongoClient("mongodb+srv://bibliotecaluizcarlos:dqFXFlBUGfNw8ky@cluster0.vlfmpuv.mongodb.net")
-db = client["gafardas"]
+client = MongoClient(
+    "mongodb+srv://bibliotecaluizcarlos:dqFXFlBUGfNw8ky@cluster0.vlfmpuv.mongodb.net/ccmgafarda?retryWrites=true&w=majority&authSource=admin"
+)
+db = client["ccmgafarda"]
 
 usuarios_col = db["usuarios"]
 cadastro_col = db["cadastro"]
