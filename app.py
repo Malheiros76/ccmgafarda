@@ -17,7 +17,7 @@ import pandas as pd
 from pymongo import MongoClient
 
 client = MongoClient(
-    "mongodb+srv://bibliotecaluizcarlos:dqFXFlBUGfNw8ky@cluster0.vlfmpuv.mongodb.net/ccmgafarda?retryWrites=true&w=majority&authSource=admin"
+    "mongodb+srv://bibliotecaluizcarlos:dqFXFlBUGfNw8ky@cluster0.vlfmpuv.mongodb.net"
 )
 db = client["ccmgafarda"]
 usuarios_col = db["usuarios"]
