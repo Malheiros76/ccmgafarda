@@ -293,7 +293,7 @@ else:
                 st.error(f"Erro ao importar arquivo: {e}")
 
     elif menu == "Alunos":
-    st.subheader("Registro de Entrega de Fardas aos Alunos")
+        st.subheader("Registro de Entrega de Fardas aos Alunos")
 
     alunos = list(alunos_col.find())
     nomes_alunos = [a["nome"] for a in alunos] if alunos else []
@@ -408,7 +408,7 @@ else:
                 st.warning("Nenhuma peça foi informada com quantidade maior que zero.")
 
     # --- CONSULTAR ALUNO ---
-elif menu == "Consultar Aluno":
+    elif menu == "Consultar Aluno":
         st.subheader("Consulta de Entregas de Fardas por Aluno")
         alunos = list(alunos_col.find())
         nomes_alunos = [a["nome"] for a in alunos] if alunos else []
@@ -425,7 +425,7 @@ elif menu == "Consultar Aluno":
                 st.info("Nenhum registro encontrado para este aluno.")
 
     # --- ABA IMPORTAR ALUNOS ---
-elif menu == "Importar Alunos":
+    elif menu == "Importar Alunos":
         st.subheader("📚 Importar Alunos via TXT ou CSV")
 
         if st.button("🧹 Limpar Tabela de Alunos"):
@@ -472,7 +472,7 @@ elif menu == "Importar Alunos":
             st.error(f"❌ Erro ao importar arquivo: {e}")
 
 # --- ABA CADASTRO DE USUÁRIOS ---
-elif menu == "Cadastro de Usuários":
+    elif menu == "Cadastro de Usuários":
         st.subheader("Cadastro e Gerenciamento de Usuários")
 
         usuarios = list(usuarios_col.find({}, {"_id": 0, "usuario": 1, "nivel": 1}))
@@ -518,7 +518,7 @@ elif menu == "Cadastro de Usuários":
                     st.success(f"Usuário {novo_usuario} cadastrado com sucesso!")
                     st.rerun()
 
-elif menu == "🚪 Sair do Sistema":
+    elif menu == "🚪 Sair do Sistema":
         st.session_state.logado = False
         st.success("Sessão encerrada.")
         st.rerun()
