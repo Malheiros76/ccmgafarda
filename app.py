@@ -17,7 +17,7 @@ import pandas as pd
 from pymongo import MongoClient
 
 client = MongoClient(
-    "mongodb+srv://bibliotecaluizcarlos:dqFXFlBUGfNw8ky@cluster0.vlfmpuv.mongodb.net?retryWrites=true&w=majority"
+    "mongodb+srv://bibliotecaluizcarlos:dqgFXFlBUGfNw8ky@cluster0.vlfmpuv.mongodb.net?retryWrites=true&w=majority"
 )
 db = client["ccmgafarda"]
 
