@@ -16,7 +16,7 @@ import pandas as pd
 
 # --- CONFIGURAÇÃO DE MONGO ---
 client = MongoClient("mongodb+srv://bibliotecaluizcarlos:dqFXFlBUGfNw8ky@cluster0.vlfmpuv.mongodb.net")
-db = client["fardasDB"]
+db = client["gafardas"]
 
 usuarios_col = db["usuarios"]
 cadastro_col = db["cadastro"]
