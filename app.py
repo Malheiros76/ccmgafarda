@@ -274,25 +274,25 @@ else:
     arquivo = st.file_uploader("Arquivo", type=["txt", "csv"])
     delimitador = st.selectbox("Delimitador", [";", ",", "\\t"])
     if arquivo:
-      delimitador_real = {";": ";", ",": ",", "\\t": "\t"}[delimitador]
-           try:
-                df = pd.read_csv(arquivo, delimiter=delimitador_real)
-                st.dataframe(df)
-                if st.button("Importar"):
-                    for _, row in df.iterrows():
-                        movimentacao_col.insert_one({
-                            "data": str(row.get("data", datetime.now().strftime("%Y-%m-%d"))),
-                            "tipo": row.get("tipo"),
-                            "funcionario": row.get("funcionario"),
-                            "produto": row.get("produto"),
-                            "quantidade": int(row.get("quantidade", 0))
-                        })
-                        produtos_col.update_one({"produto": row.get("produto")}, {"$set": {"produto": row.get("produto")}}, upsert=True)
+       delimitador_real = {";": ";", ",": ",", "\\t": "\t"}[delimitador]
+    try:
+            df = pd.read_csv(arquivo, delimiter=delimitador_real)
+            st.dataframe(df)
+            if st.button("Importar"):
+                for _, row in df.iterrows():
+                    movimentacao_col.insert_one({
+                        "data": str(row.get("data", datetime.now().strftime("%Y-%m-%d"))),
+                        "tipo": row.get("tipo"),
+                        "funcionario": row.get("funcionario"),
+                        "produto": row.get("produto"),
+                        "quantidade": int(row.get("quantidade", 0))
+                    })
+                    produtos_col.update_one({"produto": row.get("produto")}, {"$set": {"produto": row.get("produto")}}, upsert=True)
                     st.success("Importação concluída!")
-            except Exception as e:
+    except Exception as e:
                 st.error(f"Erro ao importar arquivo: {e}")
 
-    elif menu == "Alunos":
+    else menu == "Alunos":
         st.subheader("Registro de Entrega de Fardas aos Alunos")
 
     alunos = list(alunos_col.find())
