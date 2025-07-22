@@ -106,15 +106,15 @@ def calcular_estoque():
     return pd.DataFrame(lista)
 
 # --- INÍCIO DO APP ---
-st.set_page_config(page_title="Sistema de Fardas", layout="wide")
+st.set_page_config(page_title="Sistema de Fardas By Malheiros", layout="wide")
 
-st.title("Sistema de Controle de Fardas")
+st.title("Sistema de Controle de Fardas By Malheiros")
 
 if "logado" not in st.session_state:
     st.session_state.logado = False
 
 if not st.session_state.logado:
-    st.subheader("Login do Sistema")
+    st.subheader("Login do Sistema By Malheiros V2.08")
     with st.form("login"):
         usuario = st.text_input("Usuário")
         senha = st.text_input("Senha", type="password")
@@ -271,8 +271,8 @@ else:
     # --- ABA IMPORTAR ESTOQUE ---
     elif menu == "Importar Estoque":
         st.subheader("Importar Estoque via TXT ou CSV")
-    arquivo = st.file_uploader("Arquivo", type=["txt", "csv"])
-    delimitador = st.selectbox("Delimitador", [";", ",", "\\t"])
+        arquivo = st.file_uploader("Arquivo", type=["txt", "csv"])
+        delimitador = st.selectbox("Delimitador", [";", ",", "\\t"])
     if arquivo:
             delimitador_real = {";": ";", ",": ",", "\\t": "\t"}[delimitador]
             try:
@@ -458,7 +458,7 @@ else:
                         {"cgm": str(row["CGM"])},
                         {
                             "$s"
-                            "et": {
+                            "$set": {
                                 "nome": str(row["Nome do Estudante"]).strip(),
                                 "turma": str(row["Turma"]).strip(),
                                 "sexo": sexo_texto,
