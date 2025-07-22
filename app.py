@@ -273,7 +273,7 @@ else:
         st.subheader("Importar Estoque via TXT ou CSV")
         arquivo = st.file_uploader("Arquivo", type=["txt", "csv"])
         delimitador = st.selectbox("Delimitador", [";", ",", "\\t"])
-    if arquivo:
+            if arquivo:
             delimitador_real = {";": ";", ",": ",", "\\t": "\t"}[delimitador]
             try:
                 df = pd.read_csv(arquivo, delimiter=delimitador_real)
