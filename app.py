@@ -271,11 +271,11 @@ else:
     # --- ABA IMPORTAR ESTOQUE ---
     elif menu == "Importar Estoque":
         st.subheader("Importar Estoque via TXT ou CSV")
-        arquivo = st.file_uploader("Arquivo", type=["txt", "csv"])
-        delimitador = st.selectbox("Delimitador", [";", ",", "\\t"])
-            if arquivo:
-            delimitador_real = {";": ";", ",": ",", "\\t": "\t"}[delimitador]
-            try:
+    arquivo = st.file_uploader("Arquivo", type=["txt", "csv"])
+    delimitador = st.selectbox("Delimitador", [";", ",", "\\t"])
+    if arquivo:
+      delimitador_real = {";": ";", ",": ",", "\\t": "\t"}[delimitador]
+           try:
                 df = pd.read_csv(arquivo, delimiter=delimitador_real)
                 st.dataframe(df)
                 if st.button("Importar"):
